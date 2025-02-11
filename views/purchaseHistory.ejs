@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate') %>
+
+
+<h1>Your Orders</h1>
+
+<% if (orders.length === 0) { %>
+    <p>No orders to display.</p>
+<% } else { %>
+    <ul>
+        <% orders.forEach(order => { %>
+            <li>
+                <h3>Order ID: <%= order._id %></h3>
+                <p>Total Amount: $<%= order.totalAmount.toFixed(2) %></p>
+                <h4>Products:</h4>
+                <ul>
+                    <% order.products.forEach(productItem => { %>
+                        <li>
+                            <p>Product Name: <%= productItem.product.name %></p>
+                            <p>Price: $<%= productItem.price %></p>
+                            <p>Quantity: <%= productItem.quantity %></p>
+                        </li>
+                    <% }) %>
+                </ul>
+            </li>
+        <% }) %>
+    </ul>
+<% } %>

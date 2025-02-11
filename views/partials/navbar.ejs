@@ -1,0 +1,51 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #333;">
+  <div class="container">
+    <!-- Logo and Brand -->
+    <a class="navbar-brand" href="/products" style="color: #f8f9fa;">
+      <i class="fas fa-shopping-basket" style="margin-right: 10px; font-size: 1.7rem;"></i>Shopping Cart
+    </a>
+    
+    <!-- Toggler button for mobile view -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links and User section -->
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <!-- Left-aligned links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/products">Products</a>
+        </li>
+        <% if (currentUser && currentUser.role === 'seller') { %>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/products/new">New</a>
+        </li>
+        <% } %>
+        <!-- Buy History link -->
+        <% if (currentUser) { %>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/user/history">Buy History</a>
+        </li>
+        <% } %>
+      </ul>
+
+      <!-- Right-aligned User Account and Cart Section -->
+      <div class="navbar-nav ms-auto">
+        <% if (!currentUser) { %>
+          <a href="/login" class="nav-link text-white">Login</a>
+        <% } else { %>
+          <a href="/user/orders" class="nav-link text-white text-capitalize">Hello, <%= currentUser.username %></a>
+          <a href="/user/cart" class="nav-link text-white position-relative">
+            <i class="fas fa-shopping-cart"></i>
+            <sup><span class="badge bg-danger position-absolute top-0 start-100 translate-middle badge-cart-count"><%= currentUser.cart.length %></span></sup>
+          </a>
+          <a href="/logout" class="nav-link text-white">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
